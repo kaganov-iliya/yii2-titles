@@ -5,13 +5,20 @@ $params = require(__DIR__ . '/params.php');
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log',
+        [
+            'class' => 'app\modules\titles\Bootstrap'
+        ]
+    ],
     'modules' => [
         'titles' => [
             'class' => 'app\modules\titles\Module',
         ],
     ],
     'components' => [
+        'urlTitles' => [
+            'class' => 'app\modules\titles\components\UrlTitles'
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'Pop54x0S-63t9TO2S-D-w3T6ML4z3Snj',
@@ -42,18 +49,18 @@ $config = [
                 ],
             ],
         ],
-		'urlManager' => [
-			'enablePrettyUrl' => true,
-			'showScriptName' => false,
-			'rules' => [
-				'' => 'site/index',
-				'login' => 'site/login',
-			],
-		],
-		'assetManager' => [
-			'basePath' => '@webroot/assets',
-			'baseUrl' => '@web/assets',
-		],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+                '' => 'site/index',
+                'login' => 'site/login',
+            ],
+        ],
+        'assetManager' => [
+            'basePath' => '@webroot/assets',
+            'baseUrl' => '@web/assets',
+        ],
         'db' => require(__DIR__ . '/db.php'),
     ],
     'params' => $params,

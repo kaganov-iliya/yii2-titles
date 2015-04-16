@@ -19,16 +19,12 @@ class DefaultController extends Controller
             'query' => UrlTitles::find(),
         ]);
 
-        $customers = UrlTitles::findOne([
-            'url' => $_GET['r'],
-//            'status' => Customer::STATUS_ACTIVE,
-        ]);
+       
 
 //        $customers = UrlTitles::find()
 //            ->all();
 // echo '<pre>'; print_r($customers); die();
         return $this->render('index', [
-            'customers' => $customers,
             'dataProvider' => $dataProvider,
         ]);
 
