@@ -27,7 +27,7 @@ class UrlTitles extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['url', 'title'], 'required'],
+//            [['url', 'title'], 'required'],
             [['url', 'title'], 'string', 'max' => 255]
         ];
     }

@@ -1,0 +1,9 @@
+.field-urltitles-url,
+.field-urltitles-title{
+    width: 49%;
+    display: inline-block;
+}
+.form-group{
+    width: 100%;
+    display: inline-block;
+}

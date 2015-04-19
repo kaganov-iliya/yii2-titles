@@ -9,6 +9,6 @@ class UrlTitles extends \yii\base\Component
     public function run()
     {
         //print_R($_SERVER['REQUEST_URI']);exit;
-        Yii::$app->getView()->title = 'My';
+//        Yii::$app->getView()->title = 'My';
     }
 }

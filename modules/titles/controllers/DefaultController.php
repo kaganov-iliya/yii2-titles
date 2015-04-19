@@ -5,7 +5,7 @@ namespace app\modules\titles\controllers;
 use yii\web\Controller;
 use Yii;
 use app\modules\titles\models\UrlTitles;
-use yii\data\ActiveDataProvider;
+use yii\base\Model;
 
 class DefaultController extends Controller
 {
@@ -14,19 +14,69 @@ class DefaultController extends Controller
 
     public function actionIndex()
     {
-//        return $this->render('index');
-        $dataProvider = new ActiveDataProvider([
-            'query' => UrlTitles::find(),
-        ]);
+        $items  = UrlTitles::find()
+            ->all();
+        $model = new UrlTitles();
+        if (Model::loadMultiple($items, Yii::$app->request->post()) && $model->load(Yii::$app->request->post())) {
+            $count = 0;
+            foreach ($items as $item) {
+                if ($item->save()) {
+                    $count++;
+                }
+            }
+            if(Yii::$app->request->post()['UrlTitles']['url'] == '' || Yii::$app->request->post()['UrlTitles']['title'] == ''){
+                return $this->redirect(['index']);
+            }
+            $model->save();
 
-       
+            Yii::$app->session->setFlash('success', "Processed {$count} records successfully.");
+            return $this->render('index', [
+                'items' => $items,
+                'model' => $model,
+            ]);
+        }elseif ($model->load(Yii::$app->request->post())) {
+            $count = 0;
+            foreach ($items as $item) {
+                if ($item->save()) {
+                    $count++;
+                }
+            }
+            if(Yii::$app->request->post()['UrlTitles']['url'] == '' || Yii::$app->request->post()['UrlTitles']['title'] == ''){
+                return $this->redirect(['index']);
+            }
+            $model->save();
 
-//        $customers = UrlTitles::find()
-//            ->all();
-// echo '<pre>'; print_r($customers); die();
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
+            Yii::$app->session->setFlash('success', "Processed {$count} records successfully.");
+            return $this->render('index', [
+                'items' => $items,
+                'model' => $model,
+            ]);
+        }else{
+            return $this->render('index', [
+                'items' => $items,
+                'model' => $model,
+            ]);
+        }
+
+
+
+
+
+
+//        $dataProvider = new ActiveDataProvider([
+//            'query' => UrlTitles::find(),
+//        ]);
+//
+//        $model = new UrlTitles();
+//
+//        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+//            return $this->redirect(['index']);
+//        }
+//
+//        return $this->render('index', [
+//            'dataProvider' => $dataProvider,
+//            'model' => $model,
+//        ]);
 
     }
 
