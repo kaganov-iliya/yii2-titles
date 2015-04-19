@@ -5,6 +5,7 @@ namespace app\modules\titles;
 use Yii;
 use app\modules\titles\models\UrlTitles;
 use  yii\helpers\Url;
+use app\modules\titles\web\Asset;
 
 class Bootstrap implements \yii\base\BootstrapInterface
 {
@@ -13,7 +14,7 @@ class Bootstrap implements \yii\base\BootstrapInterface
     
     public function bootstrap($app)
     {
-        Yii::$app->getView()->registerCssFIle('style.css');
+        Asset::register(Yii::$app->getView());
         Yii::$app->getView()->on(\yii\base\View::EVENT_AFTER_RENDER,function(){
 
             $ulr_titles = UrlTitles::find()
