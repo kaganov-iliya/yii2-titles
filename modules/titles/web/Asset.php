@@ -7,4 +7,8 @@ use Yii;
 class Asset extends \yii\web\AssetBundle
 {
     public $sourcePath = '@app/modules/titles/assets';
+    
+    public $css = [
+        'css/style.css',
+    ];
 }
