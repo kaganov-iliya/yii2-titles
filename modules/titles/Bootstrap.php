@@ -28,6 +28,12 @@ class Bootstrap implements \yii\base\BootstrapInterface
                         self::$_inited = true;
                         Yii::$app->getView()->title = $url_title->title;
                     }
+                }elseif((strpos($current_url, $url_title->url) || strpos($current_url, '/'.$url_title->url) || strpos(Url::to(''), $url_title->url) || strpos($_SERVER['HTTP_HOST'].Url::to(''), $url_title->url)) === true){
+                    if(self::$_inited === false)
+                    {
+                        self::$_inited = true;
+                        Yii::$app->getView()->title = $url_title->title;
+                    }
                 }
 
             }

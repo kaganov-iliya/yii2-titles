@@ -18,9 +18,14 @@ class DefaultController extends Controller
             ->all();
         $model = new UrlTitles();
         if (Model::loadMultiple($items, Yii::$app->request->post()) && $model->load(Yii::$app->request->post())) {
-            $count = 0;
             foreach ($items as $item) {
                 $item->save();
+            }
+
+            foreach($items as $item){
+                if($item->url == $model->url || $item->title == $model->title){
+                    return $this->redirect(['index']);
+                }
             }
             if(Yii::$app->request->post()['UrlTitles']['url'] == '' || Yii::$app->request->post()['UrlTitles']['title'] == ''){
                 return $this->redirect(['index']);
@@ -32,9 +37,13 @@ class DefaultController extends Controller
                 'model' => $model,
             ]);
         }elseif ($model->load(Yii::$app->request->post())) {
-            $count = 0;
             foreach ($items as $item) {
                 $item->save();
+            }
+            foreach($items as $item){
+                if($item->url == $model->url || $item->title == $model->title){
+                    return $this->redirect(['index']);
+                }
             }
             if(Yii::$app->request->post()['UrlTitles']['url'] == '' || Yii::$app->request->post()['UrlTitles']['title'] == ''){
                 return $this->redirect(['index']);
