@@ -13,6 +13,5 @@ class Module extends \yii\base\Module
     {
         parent::init();
         Asset::register(Yii::$app->getView());
-        // custom initialization code goes here
     }
 }

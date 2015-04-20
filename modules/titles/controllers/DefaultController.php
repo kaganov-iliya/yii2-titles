@@ -20,16 +20,13 @@ class DefaultController extends Controller
         if (Model::loadMultiple($items, Yii::$app->request->post()) && $model->load(Yii::$app->request->post())) {
             $count = 0;
             foreach ($items as $item) {
-                if ($item->save()) {
-                    $count++;
-                }
+                $item->save();
             }
             if(Yii::$app->request->post()['UrlTitles']['url'] == '' || Yii::$app->request->post()['UrlTitles']['title'] == ''){
                 return $this->redirect(['index']);
             }
             $model->save();
 
-            Yii::$app->session->setFlash('success', "Processed {$count} records successfully.");
             return $this->render('index', [
                 'items' => $items,
                 'model' => $model,
@@ -37,16 +34,13 @@ class DefaultController extends Controller
         }elseif ($model->load(Yii::$app->request->post())) {
             $count = 0;
             foreach ($items as $item) {
-                if ($item->save()) {
-                    $count++;
-                }
+                $item->save();
             }
             if(Yii::$app->request->post()['UrlTitles']['url'] == '' || Yii::$app->request->post()['UrlTitles']['title'] == ''){
                 return $this->redirect(['index']);
             }
             $model->save();
 
-            Yii::$app->session->setFlash('success', "Processed {$count} records successfully.");
             return $this->render('index', [
                 'items' => $items,
                 'model' => $model,
@@ -57,68 +51,7 @@ class DefaultController extends Controller
                 'model' => $model,
             ]);
         }
-
-
-
-
-
-
-//        $dataProvider = new ActiveDataProvider([
-//            'query' => UrlTitles::find(),
-//        ]);
-//
-//        $model = new UrlTitles();
-//
-//        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-//            return $this->redirect(['index']);
-//        }
-//
-//        return $this->render('index', [
-//            'dataProvider' => $dataProvider,
-//            'model' => $model,
-//        ]);
-
     }
-
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    public function actionCreate()
-    {
-        $model = new UrlTitles();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-    }
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-    }
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
-
-
     protected function findModel($id)
     {
         if (($model = UrlTitles::findOne($id)) !== null) {

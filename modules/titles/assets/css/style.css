@@ -1,9 +1,15 @@
-.field-urltitles-url,
-.field-urltitles-title{
+.url-titles-index .form .form-group{
+    width: 100%;
+    display: inline-block;
+}
+.url-titles-index .form .field-urltitles-url,
+.url-titles-index .form .field-urltitles-title{
     width: 49%;
     display: inline-block;
 }
-.form-group{
-    width: 100%;
-    display: inline-block;
+.url-titles-index .form table tr td .form-group{
+    width: 98%;
+}
+.url-titles-index .form table{
+    width: 98%;
 }

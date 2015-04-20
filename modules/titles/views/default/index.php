@@ -13,27 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Url Titles', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-
-<!--    --><?//= GridView::widget([
-//        'dataProvider' => $dataProvider,
-//        'columns' => [
-////            ['class' => 'yii\grid\SerialColumn'],
-//
-////            'id',
-//            'url:url',
-//            'title',
-//
-//            ['class' => 'yii\grid\ActionColumn'],
-//        ],
-//
-//    ]);
-//    ?>
-
-
     <div class="form">
         <?php $form = ActiveForm::begin(); ?>
         <table>
@@ -41,11 +20,14 @@ $this->params['breadcrumbs'][] = $this->title;
             <?if(isset($items) && !empty($items)){?>
             <?php foreach($items as $i=>$item): ?>
                 <tr>
-<!--                    <td>--><?//= $form->field($item,"[$i]id"); ?><!--</td>-->
                     <td><?= $form->field($item,"[$i]title")->label(false); ?></td>
                     <td><?= $form->field($item,"[$i]url")->label(false); ?></td>
                 </tr>
             <?php endforeach; ?>
+            <?php } ?>
+            <?php if(!empty($model->title) && !empty($model->url)){?>
+                <td><?= $form->field($model, 'url')->label(false); ?></td>
+                <td><?= $form->field($model, 'title')->label(false); ?></td>
             <?php } ?>
         </table>
         <?= $form->field($model, 'url')->textInput(['maxlength' => 255]) ?>
