@@ -16,27 +16,29 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="form">
         <?php $form = ActiveForm::begin(); ?>
         <table>
-            <tr><th>title</th><th>url</th></tr>
-            <?if(isset($items) && !empty($items)){?>
-            <?php foreach($items as $i=>$item): ?>
-                <tr>
-                    <td><?= $form->field($item,"[$i]title")->label(false); ?></td>
-                    <td><?= $form->field($item,"[$i]url")->label(false); ?></td>
-                </tr>
-            <?php endforeach; ?>
+            <tr>
+                <th>title</th>
+                <th>url</th>
+            </tr>
+            <? if (isset($items) && !empty($items)) { ?>
+                <?php foreach ($items as $i => $item): ?>
+                    <tr>
+                        <td><?= $form->field($item, "[$i]title")->label(false); ?></td>
+                        <td><?= $form->field($item, "[$i]url")->label(false); ?></td>
+                    </tr>
+                <?php endforeach; ?>
             <?php } ?>
-            <?php if(!empty($model->title) && !empty($model->url)){?>
-                <td><?= $form->field($model, 'url')->label(false); ?></td>
+            <?php if (!empty($model->title) && !empty($model->url)) { ?>
                 <td><?= $form->field($model, 'title')->label(false); ?></td>
+                <td><?= $form->field($model, 'url')->label(false); ?></td>
             <?php } ?>
         </table>
-        <?= $form->field($model, 'url')->textInput(['maxlength' => 255]) ?>
-
         <?= $form->field($model, 'title')->textInput(['maxlength' => 255]) ?>
+        <?= $form->field($model, 'url')->textInput(['maxlength' => 255]) ?>
         <?= Html::submitButton('Сохранить'); ?>
         <?php ActiveForm::end(); ?>
-    </div><!-- form -->
-
+    </div>
+    <!-- form -->
 
 
 </div>
